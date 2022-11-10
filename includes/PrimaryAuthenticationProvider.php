@@ -114,7 +114,7 @@ class PrimaryAuthenticationProvider extends AbstractPrimaryAuthenticationProvide
 		}
 
 		$url = SpecialPage::getTitleFor( 'PluggableAuthLogin' )->getFullURL();
-		$this->manager->setAuthenticationSessionData(
+		$this->manager->getRequest()->getSession()->setSecret(
 			PluggableAuthLogin::RETURNTOURL_SESSION_KEY, $request->returnToUrl );
 
 		$queryValues = $this->manager->getRequest()->getQueryValues();

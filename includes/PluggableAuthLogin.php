@@ -135,7 +135,7 @@ class PluggableAuthLogin extends UnlistedSpecialPage {
 		if ( $error !== null ) {
 			$this->authManager->setAuthenticationSessionData( self::ERROR_SESSION_KEY, $error );
 		}
-		$returnToUrl = $this->authManager->getAuthenticationSessionData( self::RETURNTOURL_SESSION_KEY );
+		$returnToUrl = $this->authManager->getRequest()->getSession()->getSecret( self::RETURNTOURL_SESSION_KEY );
 		if ( $returnToUrl === null || strlen( $returnToUrl ) === 0 ) {
 			// This should never happen unless there is an issue in the authentication plugin, most
 			// likely resulting in session corruption. Since it is unclear if it is safe to continue,

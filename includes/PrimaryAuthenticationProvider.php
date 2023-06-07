@@ -226,7 +226,11 @@ class PrimaryAuthenticationProvider extends AbstractPrimaryAuthenticationProvide
 	 */
 	public function testUserCanAuthenticate( $username ) {
 		// Additionally check if specified username is not reserved for system users
-		$isUsable = $this->userNameUtils->isUsable( $username );
+		if (isset($this->userNameUtils)) {
+			$isUsable = $this->userNameUtils->isUsable( $username );
+		} else {
+			$isUsable = MediaWikiServices::getInstance()->getUserNameUtils()->isUsable( $username );
+		}
 
 		return $isUsable && $this->testUserExists( $username );
 	}
